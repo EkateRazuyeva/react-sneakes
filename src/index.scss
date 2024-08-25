@@ -1,13 +1,13 @@
 body {
   margin: 0;
-  font-family: 'Inter', sistem-ui;
+  font-family: 'Inter';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #E7F6FF;
 }
 
 * {
-  font-family: 'Inter', sistem-ui;
+  font-family: 'Inter';
 }
 
 
@@ -52,7 +52,7 @@ header {
     transform: translateY(-5px);
   }
 
-  favorite {
+  .favorite {
     position: absolute;
     cursor: pointer;
   }
