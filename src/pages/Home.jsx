@@ -1,6 +1,31 @@
 import {Card} from "../components/Card";
 
-export const Home = ({onChangeSearchInput, setSearchValue, searchValue, onAddToCart, onAddToFavorites, items}) => {
+
+
+export const Home = ({
+                         onChangeSearchInput,
+                         setSearchValue,
+                         searchValue,
+                         onAddToFavorites,
+                         items,
+                         isLoading
+                     }) => {
+
+
+    const renderItems = () => {
+        const filteredItems = items
+            .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+        return (isLoading ? [...Array(12)] : filteredItems)
+            .map((item, index) => (
+                <Card
+                    key={index}
+                    onFavorite={(obj) => onAddToFavorites(obj)}
+                    loading={isLoading}
+                    {...item}
+                />
+            ))
+    }
+
     return (
         <div className="content p-40">
             <div className={'d-flex align-center justify-between mb-40'}>
@@ -20,19 +45,7 @@ export const Home = ({onChangeSearchInput, setSearchValue, searchValue, onAddToC
                 </div>
             </div>
             <div className={'d-flex flex-wrap'}>
-                {
-                    items
-                        .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-                        .map((item, index) => (
-                            <Card
-                                key={index}
-                                onPlus={(obj) => onAddToCart(obj)}
-                                onFavorite={(obj) => onAddToFavorites(obj)}
-                                {...item}
-
-                            />
-                        ))
-                }
+                {renderItems()}
             </div>
 
         </div>

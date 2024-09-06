@@ -149,6 +149,10 @@ header {
   .greenButton {
     position: relative;
 
+    &:disabled{
+      background-color: #bebebe;
+    }
+
     &:hover {
       img {
         transform: translateX(5px);
