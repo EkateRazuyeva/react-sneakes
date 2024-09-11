@@ -10,14 +10,15 @@ export function Card({
                          price,
                          imgUrl,
                          onFavorite,
+                         onAddToCart,
                          favorite = false,
                          loading = false,
                      }) {
 
-    const {onAddToCart, isItemAdded} = useContext(AppContext)
+    const {isItemAdded} = useContext(AppContext)
     const [isFavorite, setIsFavorite] = useState(favorite)
 
-const obj = {id, parentId:id, title, price, imgUrl }
+    const obj = {id, parentId: id, title, price, imgUrl}
 
     const onClickPlus = () => {
         onAddToCart(obj)
@@ -47,9 +48,11 @@ const obj = {id, parentId:id, title, price, imgUrl }
                     <rect x="118" y="171" rx="10" ry="10" width="32" height="32"/>
                 </ContentLoader>
                 : <>
-                    <div className={styles.favorite} onClick={onClickFavorite}>
-                        <img src={isFavorite ? "/img/liked.svg" : "/img/unliked.svg"} alt="Unliked"/>
-                    </div>
+                    {onFavorite &&
+                        <div className={styles.favorite} onClick={onClickFavorite}>
+                            <img src={isFavorite ? "/img/liked.svg" : "/img/unliked.svg"} alt="Unliked"/>
+                        </div>
+                    }
                     <img width={133} height={112} src={imgUrl} alt="Sneakers"/>
                     <h5>{title}</h5>
                     <div className={'d-flex justify-between align-center'}>
@@ -57,10 +60,10 @@ const obj = {id, parentId:id, title, price, imgUrl }
                             <span>Цена:</span>
                             <b>{price} руб.</b>
                         </div>
-                        <img className={styles.plus}
-                             onClick={onClickPlus}
-                             src={isItemAdded(id) ? "/img/btn-checked.svg" : "/img/btn-plus.svg"}
-                             alt="Plus"/>
+                        {onAddToCart && <img className={styles.plus}
+                                             onClick={onClickPlus}
+                                             src={isItemAdded(id) ? "/img/btn-checked.svg" : "/img/btn-plus.svg"}
+                                             alt="Plus"/>}
                     </div>
                 </>
             }

@@ -1,14 +1,14 @@
 import {Card} from "../components/Card";
 
 
-
 export const Home = ({
                          onChangeSearchInput,
                          setSearchValue,
                          searchValue,
                          onAddToFavorites,
                          items,
-                         isLoading
+                         isLoading,
+                         onAddToCart
                      }) => {
 
 
@@ -20,6 +20,7 @@ export const Home = ({
                 <Card
                     key={index}
                     onFavorite={(obj) => onAddToFavorites(obj)}
+                    onAddToCart={(obj) => onAddToCart(obj)}
                     loading={isLoading}
                     {...item}
                 />

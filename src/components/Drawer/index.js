@@ -1,12 +1,14 @@
-import {Info} from "./Info";
-import {useContext, useState} from "react";
-import {AppContext} from "../App";
+import {Info} from "../Info";
+import {useState} from "react";
 import axios from "axios";
+import {useCart} from "../../hooks/useCart";
+import styles from './Drawer.module.scss'
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export function Drawer({onClose, onRemove, items = []}) {
-    const {setCartItems, cartItems} = useContext(AppContext)
+export function Drawer({onClose, onRemove, items = [], opened}) {
+    const {cartItems, setCartItems, totalPrice} = useCart()
+
     const [isOrderComplete, setIsOrderComplete] = useState(false)
     const [orderId, setOrderId] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -35,15 +37,15 @@ export function Drawer({onClose, onRemove, items = []}) {
     };
 
     return (
-        <div className={'overlay'}>
-            <div className={'drawer'}>
+        <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
+            <div className={styles.drawer }>
                 <h2 className={'mb-30 d-flex justify-between'}>Корзина
                     <img onClick={onClose} className={'removeBtn cu-p'} src="/img/btn-remove.svg" alt="Close"/>
                 </h2>
 
                 {items.length > 0
                     ? <div className={'d-flex flex-column flex'}>
-                        <div className="items">
+                        <div className='items flex'>
                             {items.map(obj => (
                                 <div key={obj.id} className="cartItem d-flex align-center mb-20">
                                     <div style={{backgroundImage: `url(${obj.imgUrl})`}}
@@ -63,12 +65,12 @@ export function Drawer({onClose, onRemove, items = []}) {
                                 <li className={'d-flex'}>
                                     <span>Итого:</span>
                                     <div></div>
-                                    <b>21 498 руб. </b>
+                                    <b>{totalPrice} руб. </b>
                                 </li>
                                 <li className={'d-flex'}>
                                     <span>Налог 5%</span>
                                     <div></div>
-                                    <b>1074 руб. </b>
+                                    <b>{totalPrice * 0.05} руб. </b>
                                 </li>
                             </ul>
                             <button disabled={isLoading} onClick={onClickOrder} className={'greenButton'}>Оформить заказ

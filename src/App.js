@@ -5,6 +5,7 @@ import {Drawer} from "./components/Drawer";
 import {createContext, useEffect, useState} from "react";
 import {Home} from "./pages/Home";
 import {Favorites} from "./pages/Favorites";
+import {Orders} from "./pages/Orders";
 
 
 export const AppContext = createContext({})
@@ -20,15 +21,22 @@ function App() {
 
     useEffect(() => {
         async function fetchData() {
-            setIsLoading(true)
-            const itemsResponse = await axios.get('https://2e5a85215fc0073f.mokky.dev/items')
-            const cartResponse = await axios.get('https://2e5a85215fc0073f.mokky.dev/cart')
-            const favoritesResponse = await axios.get('https://2e5a85215fc0073f.mokky.dev/favorites')
-            setIsLoading(false)
+            try {
+                const [itemsResponse, cartResponse, favoritesResponse] = await Promise.all([
+                    axios.get('https://2e5a85215fc0073f.mokky.dev/items'),
+                    axios.get('https://2e5a85215fc0073f.mokky.dev/cart'),
+                    axios.get('https://2e5a85215fc0073f.mokky.dev/favorites')
+                ])
 
-            setItems(itemsResponse.data)
-            setCartItems(cartResponse.data)
-            setFavorites(favoritesResponse.data)
+                setIsLoading(false)
+                setItems(itemsResponse.data)
+                setCartItems(cartResponse.data)
+                setFavorites(favoritesResponse.data)
+            } catch (error) {
+                alert('Ошибка при запросе данных')
+                console.error(error)
+            }
+
 
         }
 
@@ -73,7 +81,6 @@ function App() {
         }
     }
 
-
     const onAddToFavorites = async (obj) => {
 
         try {
@@ -81,18 +88,14 @@ function App() {
                 axios.delete(`https://2e5a85215fc0073f.mokky.dev/favorites/${obj.id}`);
                 setFavorites((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
             } else {
-                const { data } = await axios.post('https://2e5a85215fc0073f.mokky.dev/favorites', obj,);
+                const {data} = await axios.post('https://2e5a85215fc0073f.mokky.dev/favorites', obj,);
                 setFavorites((prev) => [...prev, data]);
             }
         } catch (error) {
             alert('Не удалось добавить в фавориты');
             console.error(error);
         }
-
-
-
     }
-
 
     const onChangeSearchInput = (e) => {
         setSearchValue(e.currentTarget.value)
@@ -115,11 +118,12 @@ function App() {
                 setCartItems
             }}>
             <div className="wrapper clear">
-                {cartOpened && <Drawer
+                <Drawer
                     items={cartItems}
                     onClose={() => setCartOpened(false)}
                     onRemove={onRemoveItem}
-                />}
+                    opened={cartOpened}
+                />
                 <Header onClickCart={() => setCartOpened(true)}/>
 
                 <Routes>
@@ -143,6 +147,13 @@ function App() {
                         path="/favorites"
                         element={
                             <Favorites/>
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/orders"
+                        element={
+                            <Orders/>
                         }
                         exact
                     />
