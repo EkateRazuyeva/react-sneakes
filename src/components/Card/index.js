@@ -50,7 +50,7 @@ export function Card({
                 : <>
                     {onFavorite &&
                         <div className={styles.favorite} onClick={onClickFavorite}>
-                            <img src={isFavorite ? "/img/liked.svg" : "/img/unliked.svg"} alt="Unliked"/>
+                            <img src={isFavorite ? "img/liked.svg" : "img/unliked.svg"} alt="Unliked"/>
                         </div>
                     }
                     <img width={133} height={112} src={imgUrl} alt="Sneakers"/>
@@ -62,7 +62,7 @@ export function Card({
                         </div>
                         {onAddToCart && <img className={styles.plus}
                                              onClick={onClickPlus}
-                                             src={isItemAdded(id) ? "/img/btn-checked.svg" : "/img/btn-plus.svg"}
+                                             src={isItemAdded(id) ? "img/btn-checked.svg" : "img/btn-plus.svg"}
                                              alt="Plus"/>}
                     </div>
                 </>

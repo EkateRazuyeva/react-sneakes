@@ -40,7 +40,7 @@ export function Drawer({onClose, onRemove, items = [], opened}) {
         <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
             <div className={styles.drawer }>
                 <h2 className={'mb-30 d-flex justify-between'}>Корзина
-                    <img onClick={onClose} className={'removeBtn cu-p'} src="/img/btn-remove.svg" alt="Close"/>
+                    <img onClick={onClose} className={'removeBtn cu-p'} src="img/btn-remove.svg" alt="Close"/>
                 </h2>
 
                 {items.length > 0
@@ -55,7 +55,7 @@ export function Drawer({onClose, onRemove, items = [], opened}) {
                                         <b>{obj.price} руб</b>
                                     </div>
                                     <img onClick={() => onRemove(obj.id)} className={'removeBtn'}
-                                         src="/img/btn-remove.svg"
+                                         src="img/btn-remove.svg"
                                          alt="Remove"/>
                                 </div>
                             ))}
@@ -74,13 +74,13 @@ export function Drawer({onClose, onRemove, items = [], opened}) {
                                 </li>
                             </ul>
                             <button disabled={isLoading} onClick={onClickOrder} className={'greenButton'}>Оформить заказ
-                                <img src="/img/arrow.svg" alt="Arrow"/>
+                                <img src="img/arrow.svg" alt="Arrow"/>
                             </button>
                         </div>
                     </div>
 
                     : <Info title={isOrderComplete ? 'Заказ оформлен!' : 'Корзина пустая'}
-                            img={isOrderComplete ? '/img/complete-order.jpg' : '/img/empty-cart.jpg'}
+                            img={isOrderComplete ? 'img/complete-order.jpg' : 'img/empty-cart.jpg'}
                             description={isOrderComplete ? `Ваш заказ ${orderId} скоро будет передан курьерской доставке` : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
                     />
                 }
