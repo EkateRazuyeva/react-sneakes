@@ -1,7 +1,7 @@
 import {Card} from "../components/Card";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {AppContext} from "../App";
-import {Info} from "../components/Info";
+import {Link} from "react-router-dom";
 
 export const Favorites = () => {
 
@@ -26,12 +26,22 @@ export const Favorites = () => {
                                 ))
                         }
                     </div>
-
                 </div>
-                : <Info title={'Закладок нет :('}
-                        img={'img/favorite_emoji.png'}
-                        description={'Вы ничего не добавляли в закладки'}
-                />
+                :
+                <div className={"cartEmpty d-flex align-center justify-center flex-column flex"}>
+                    <img className={'mb-20'} style={{width: '100px', height: '100px'}}
+                         src={'img/favorite_emoji.png'}
+                         alt="favorite_emoji"/>
+                    <h2>{'Закладок нет :('}</h2>
+                    <p className={'opacity-6'}> {'Вы ничего не добавляли в закладки'}</p>
+
+                    <Link to={process.env.PUBLIC_URL + '/'}>
+                        <button className={'greenButton'}>
+                            <img src="img/arrow.svg" alt="Arrow"/>
+                            Вернуться назад
+                        </button>
+                    </Link>
+                </div>
             }
         </div>
     )

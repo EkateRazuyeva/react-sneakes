@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {AppContext} from "../App";
 
-export const Info = ({title, description, img}) => {
+export const Info = ({title, description, img, onClick}) => {
 
     const {setCartOpened}= useContext(AppContext)
 

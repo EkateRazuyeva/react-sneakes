@@ -6,7 +6,7 @@ export function Header(props) {
 
     return (
         <header className={'d-flex justify-between align-center p-40'}>
-            <Link to={'/'}>
+            <Link to={process.env.PUBLIC_URL + '/'}>
                 <div className={'d-flex align-center'}>
                     <img width={40} height={40} src='img/logo.png' alt="logo"/>
                     <div>
@@ -21,12 +21,12 @@ export function Header(props) {
                     <span>{totalPrice} руб</span>
                 </li>
                 <li className={'mr-20 cu-p'}>
-                    <Link to={'/favorites'}>
+                    <Link to={process.env.PUBLIC_URL + '/favorites'}>
                         <img width={18} height={18} src="img/heart.svg" alt="Heart"/>
                     </Link>
                 </li>
                 <li>
-                    <Link to={'/orders'}>
+                    <Link to={process.env.PUBLIC_URL + '/orders'}>
                         <img width={18} height={18} src="img/user.svg" alt="User"/>
                     </Link>
                 </li>

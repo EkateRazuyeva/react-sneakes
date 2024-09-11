@@ -1,7 +1,8 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Card} from "../components/Card";
 import axios from "axios";
 import {Info} from "../components/Info";
+import {Link} from "react-router-dom";
 
 
 export const Orders = () => {
@@ -38,12 +39,21 @@ export const Orders = () => {
                         }
                     </div>
                 </div>
-                : <Info title={'У вас нет заказов'}
-                        img={'img/orders_emoji.png'}
-                        description={'Оформите хотя бы один заказ.'}
-                />
-            }
+                : <div className={"cartEmpty d-flex align-center justify-center flex-column flex"}>
+                    <img className={'mb-20'} style={{width: '100px', height: '100px'}}
+                         src={'img/orders_emoji.png'}
+                         alt="orders_emoji"/>
+                    <h2>{'У вас нет заказов'}</h2>
+                    <p className={'opacity-6'}> {'Оформите хотя бы один заказ.'}</p>
 
+                    <Link to={process.env.PUBLIC_URL + '/'}>
+                        <button className={'greenButton'}>
+                            <img src="img/arrow.svg" alt="Arrow"/>
+                            Вернуться назад
+                        </button>
+                    </Link>
+                </div>
+            }
         </div>
     )
 }
