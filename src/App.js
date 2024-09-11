@@ -82,14 +82,24 @@ function App() {
     }
 
     const onAddToFavorites = async (obj) => {
-
         try {
-            if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
-                axios.delete(`https://2e5a85215fc0073f.mokky.dev/favorites/${obj.id}`);
-                setFavorites((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
+            const findItem = favorites.find((favObj) => Number(favObj.parentId) === Number(obj.id))
+            if (findItem) {
+                setFavorites((prev) => prev.filter((item) => Number(item.parentId) !== Number(obj.id)));
+                await axios.delete(`https://2e5a85215fc0073f.mokky.dev/favorites/${findItem.id}`);
             } else {
+                setFavorites((prev) => [...prev, obj]);
                 const {data} = await axios.post('https://2e5a85215fc0073f.mokky.dev/favorites', obj,);
-                setFavorites((prev) => [...prev, data]);
+                setFavorites((prev) =>
+                    prev.map((item) => {
+                        if (item.parentId === data.parentId) {
+                            return {
+                                ...item,
+                                id: data.id,
+                            };
+                        }
+                        return item;
+                    }));
             }
         } catch (error) {
             alert('Не удалось добавить в фавориты');
@@ -105,6 +115,10 @@ function App() {
         return cartItems.some((obj) => +obj.parentId === +id);
     };
 
+    const isItemFavorite = (id) => {
+        return favorites.some((obj) => +obj.parentId === +id);
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -114,6 +128,7 @@ function App() {
                 onAddToCart,
                 onAddToFavorites,
                 isItemAdded,
+                isItemFavorite,
                 setCartOpened,
                 setCartItems
             }}>
