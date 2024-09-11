@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-sneakes/static/css/main.17d2d0ca.css",
+    "main.js": "/react-sneakes/static/js/main.1776c203.js",
+    "index.html": "/react-sneakes/index.html",
+    "main.17d2d0ca.css.map": "/react-sneakes/static/css/main.17d2d0ca.css.map",
+    "main.1776c203.js.map": "/react-sneakes/static/js/main.1776c203.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.17d2d0ca.css",
+    "static/js/main.1776c203.js"
+  ]
+}
