@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-sneakes/static/css/main.17d2d0ca.css",
-    "main.js": "/react-sneakes/static/js/main.283829ea.js",
+    "main.js": "/react-sneakes/static/js/main.b2aeaafd.js",
     "index.html": "/react-sneakes/index.html",
     "main.17d2d0ca.css.map": "/react-sneakes/static/css/main.17d2d0ca.css.map",
-    "main.283829ea.js.map": "/react-sneakes/static/js/main.283829ea.js.map"
+    "main.b2aeaafd.js.map": "/react-sneakes/static/js/main.b2aeaafd.js.map"
   },
   "entrypoints": [
     "static/css/main.17d2d0ca.css",
-    "static/js/main.283829ea.js"
+    "static/js/main.b2aeaafd.js"
   ]
 }
